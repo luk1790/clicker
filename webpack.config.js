@@ -15,13 +15,14 @@ module.exports = {
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "app/component/")
+      "@": path.resolve(__dirname, "app/")
     }
   },
   module: {
     rules: [
       {
         test: /\.js$/,
+        exclude: ['/node_modules/'],
         use: [
           {
             loader: "babel-loader",
@@ -33,6 +34,7 @@ module.exports = {
       },
       {
         test: /\.scss$/, // made scss
+        exclude: ['/node_modules/'],
         use: extractPlugin.extract({
           use: ["css-loader", "sass-loader"]
         })
