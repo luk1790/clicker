@@ -1,0 +1,13 @@
+.content{
+
+}
+.content .buttonsWrapper{
+  display: flex;
+}
+.content .buttonsWrapper .buttons{
+  flex: 1 0;
+  margin: 20px;
+  /* border: none;
+  background: none;
+  cursor: pointer; */
+}

@@ -5,11 +5,12 @@ const { format } = require('rdate')
 class Footer extends React.Component {
   render() {
     return (
-      <div className="footer">
+      <footer className="footer">
         Created by Raqu { format(new Date(),'YYYY')}
-      </div>
+      </footer>
     );
   }
 }
+
 
 export default Footer;

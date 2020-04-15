@@ -1,0 +1,57 @@
+.header {
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  border-bottom: 1px solid grey;
+}
+
+.header .logoWrapper {
+  flex: 1 0;
+}
+.header .logoWrapper .logo {
+    height: 100px;
+}
+.header .center {
+    flex: 2 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header .walletWrapper {
+    flex: 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@keyframes example {
+  0% {
+    margin-left: 0;
+    top: 40px
+  }
+  50% {
+    margin-left: -5px;
+  }
+  100% {
+    top: 0px;
+    opacity: 0;
+    margin-left: 5px;
+  }
+}
+.header .walletWrapper .sparks {
+  position: absolute;
+  animation-name: example;
+  animation-duration: 5s;
+  animation-iteration-count: infinite; 
+}
+.header .walletWrapper .sparks.hidden { 
+  opacity: 0;
+}
+.header .clearWrapper {
+  flex: 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header .clearWrapper .clearButton {
+    margin-left: 10px;
+}
