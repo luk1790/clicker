@@ -9,12 +9,11 @@ class Content extends React.Component {
   }
 
   updateMultiply(option) {
-    console.log(option);
     this.props.updateState(option);
   }
   renderButtons(){
     let { elements } = this.props;
-    return (
+    return elements && (
       <div className="buttonsWrapper">
         {elements.map((element, key) => {
           return (
@@ -22,11 +21,11 @@ class Content extends React.Component {
               key={key}
               className={ `buttons button${key}` }
               onClick={() => {
-                this.updateMultiply({multiply: element.multiplier, price: element.price});
+                this.updateMultiply({multiplyDiff: element.multiplier, priceDiff: element.price});
               }}
               disabled={element.price>this.props.counter}
             >
-              {`${element.label}-${element.multiplier}`}
+              {`${element.label}-${element.multiplier}-${element.counter}`}
             </button>
           );
         })}

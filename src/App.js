@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import "./App.css";
 import Footer from "./footer";
@@ -7,77 +7,79 @@ import Content from "./content";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
+function App() {
+  let cookiesCounter = parseInt(cookies.get("counter"), 10);
+  let cookiesMultiply = parseInt(cookies.get("multiply"), 10);
+  let cookiesMultiplier = cookies.get("multiplier");
+  let multiplierDefault = [
+    { label: "test", multiplier: 1, price: 0, counter: 0 },
+    { label: "test", multiplier: 4, price: 200, counter: 0 },
+    { label: "test", multiplier: 6, price: 500, counter: 0 },
+    { label: "test", multiplier: 7, price: 1000, counter: 0 },
+    { label: "test", multiplier: 8, price: 2000, counter: 0 },
+  ];
+  // let intervalId = null;
+  const [counter, setCounter] = useState(cookiesCounter ? cookiesCounter : 0);
+  const [multiply, setMultiply] = useState(
+    cookiesMultiply ? cookiesMultiply : 0
+  );
+  const [multiplier, setMultiplier] = useState(
+    cookiesMultiplier ? cookiesMultiplier : multiplierDefault
+  );
 
-class App extends React.Component {
-  constructor() {
-    super();
-    let cookiesCounter = parseInt(cookies.get("counter"), 10);
-    let cookiesMultiply = parseInt(cookies.get("multiply"), 10);
-
-    this.state = {
-      counter: cookiesCounter ? cookiesCounter : 0,
-      multiply: cookiesMultiply ? cookiesMultiply : 0,
+  useEffect(() => {
+    let intervalId = setInterval(() => {
+      incrementCounter();
+    }, 1000);
+    return () => {
+      console.log('tsts');
+      clearInterval(intervalId);
     };
+  });
 
-    this.incrementCounter = this.incrementCounter.bind(this);
-    this.updateState = this.updateState.bind(this);
-    this.clearCookies = this.clearCookies.bind(this);
+  function incrementCounter() {
+    cookies.set("counter", counter, { path: "/" });
+    setCounter(counter + multiply);
   }
 
-  componentDidMount() {
-    this.intervalId = setInterval(() => {
-      this.incrementCounter();
-    }, 5000);
-  }
-  componentWillUnmount() {
-    clearInterval(this.intervalId);
-  }
-
-  updateState({multiply, price}) {
-    let newState = this.state;
-    newState.multiply = newState.multiply + multiply;
-    newState.counter = newState.counter - price;
-    cookies.set("multiply", newState.multiply, { path: "/" });
-    cookies.set("counter", newState.counter, { path: "/" });
-    this.setState(newState);
+  function updateState({ multiplyDiff, priceDiff }) {
+    setMultiply(multiply + multiplyDiff);
+    setCounter(counter - priceDiff);
+    let newMultiplier = multiplier.map((element) => {
+      if (element.multiplier === multiplyDiff && element.price === priceDiff) {
+        element.counter++;
+      }
+      return element;
+    });
+    setMultiplier(newMultiplier);
+    cookies.set("multiply", multiply + multiplyDiff, { path: "/" });
+    cookies.set("counter", counter - priceDiff, { path: "/" });
+    cookies.set("multiplier", newMultiplier, { path: "/" });
   }
 
-  incrementCounter() {
-    console.log(this.state);
-    let newState = this.state;
-    newState.counter = this.state.counter + this.state.multiply;
-    cookies.set("counter", newState.counter, { path: "/" });
-    this.setState(newState);
-  }
-
-  clearCookies() {
+  function clearCookies() {
+    setCounter(0);
+    setMultiply(0);
+    setMultiplier(multiplierDefault);
     cookies.set("multiply", 0, { path: "/" });
     cookies.set("counter", 0, { path: "/" });
-    this.setState({
-      counter: 0,
-      multiply: 0,
-    });
+    cookies.set("multiplier", multiplier, { path: "/" });
   }
-
-  render() {
-    return (
-      <div className="clicker">
-        <Header counter={this.state.counter} multiplier={this.state.multiply} clearCookies={this.clearCookies} />
-        <Content
-          elements={[
-            { label: "test", multiplier: 1, price: 0 },
-            { label: "test", multiplier: 4, price: 200 },
-            { label: "test", multiplier: 6, price: 500 },
-            { label: "test", multiplier: 7, price: 1000 },
-            { label: "test", multiplier: 8, price: 2000 },
-          ]}
-          updateState={this.updateState}
-          counter={this.state.counter}
-        />
-        <Footer />
-      </div>
-    );
-  }
+  return (
+    <div className="clicker">
+      <Header
+        counter={counter}
+        multiplier={multiply}
+        clearCookies={clearCookies}
+      />
+      <Content
+        elements={multiplier}
+        updateState={updateState}
+        counter={counter}
+      />
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
