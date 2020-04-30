@@ -28,12 +28,13 @@ function App() {
   );
 
   useEffect(() => {
-    let intervalId = setInterval(() => {
+    let intervalId = setTimeout(() => {
       incrementCounter();
     }, 1000);
     return () => {
-      console.log('tsts');
-      clearInterval(intervalId);
+      console.log(counter);
+      console.log(multiplier);
+      clearTimeout(intervalId);
     };
   });
 
@@ -63,7 +64,7 @@ function App() {
     setMultiplier(multiplierDefault);
     cookies.set("multiply", 0, { path: "/" });
     cookies.set("counter", 0, { path: "/" });
-    cookies.set("multiplier", multiplier, { path: "/" });
+    cookies.set("multiplier", multiplierDefault, { path: "/" });
   }
   return (
     <div className="clicker">

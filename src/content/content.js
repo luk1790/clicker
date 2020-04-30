@@ -11,41 +11,40 @@ class Content extends React.Component {
   updateMultiply(option) {
     this.props.updateState(option);
   }
-  renderButtons(){
+  renderButtons() {
     let { elements } = this.props;
-    return elements && (
-      <div className="buttonsWrapper">
-        {elements.map((element, key) => {
-          return (
-            <button
-              key={key}
-              className={ `buttons button${key}` }
-              onClick={() => {
-                this.updateMultiply({multiplyDiff: element.multiplier, priceDiff: element.price});
-              }}
-              disabled={element.price>this.props.counter}
-            >
-              {`${element.label}-${element.multiplier}-${element.counter}`}
-            </button>
-          );
-        })}
-      </div>
+    return (
+      elements && (
+        <div className="buttonsWrapper">
+          {elements.map((element, key) => {
+            return (
+              <button
+                key={key}
+                className={`buttons button${key}`}
+                onClick={() => {
+                  this.updateMultiply({
+                    multiplyDiff: element.multiplier,
+                    priceDiff: element.price,
+                  });
+                }}
+                disabled={element.price > this.props.counter}
+              >
+                {`${element.label}-${element.multiplier}-${element.counter}`}
+              </button>
+            );
+          })}
+        </div>
+      )
     );
   }
   render() {
-    
-    return (
-      <div className="content">
-        {this.renderButtons()}
-      </div>
-    );
+    return <div className="content">{this.renderButtons()}</div>;
   }
 }
-
 Content.propTypes = {
   counter: PropTypes.number,
   elements: PropTypes.array,
-  updateState: PropTypes.func
+  updateState: PropTypes.func,
 };
 
 export default Content;
