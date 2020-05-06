@@ -42,7 +42,7 @@ class Content extends React.Component {
   }
 }
 Content.propTypes = {
-  counter: PropTypes.number,
+  counter: PropTypes.oneOfType([PropTypes.number,PropTypes.string]),
   elements: PropTypes.array,
   updateState: PropTypes.func,
 };

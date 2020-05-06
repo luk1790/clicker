@@ -19,7 +19,7 @@ function App() {
     { label: "test", multiplier: 8, price: 2000, counter: 0 },
   ];
   // let intervalId = null;
-  const [counter, setCounter] = useState(cookiesCounter ? cookiesCounter : 0);
+  const [counter, setCounter] = useState(cookiesCounter ? cookiesCounter : "0");
   const [multiply, setMultiply] = useState(
     cookiesMultiply ? cookiesMultiply : 0
   );
@@ -28,19 +28,26 @@ function App() {
   );
 
   useEffect(() => {
+    updateTitle();
     let intervalId = setTimeout(() => {
       incrementCounter();
     }, 1000);
     return () => {
-      console.log(counter);
-      console.log(multiplier);
       clearTimeout(intervalId);
     };
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [counter]);
 
   function incrementCounter() {
-    cookies.set("counter", counter, { path: "/" });
-    setCounter(counter + multiply);
+    console.log("counter", counter + multiply);
+    if (counter !== "0") {
+      cookies.set("counter", counter + multiply, { path: "/" });
+      setCounter(counter + multiply);
+    }
+  }
+
+  function updateTitle() {
+    document.getElementById("title").innerText = `${counter}$ - Game`;
   }
 
   function updateState({ multiplyDiff, priceDiff }) {
@@ -59,7 +66,7 @@ function App() {
   }
 
   function clearCookies() {
-    setCounter(0);
+    setCounter("0");
     setMultiply(0);
     setMultiplier(multiplierDefault);
     cookies.set("multiply", 0, { path: "/" });

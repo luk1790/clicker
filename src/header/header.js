@@ -33,7 +33,7 @@ function Header(props){
 }
 
 Header.propTypes = {
-  counter: PropTypes.number,
+  counter: PropTypes.oneOfType([PropTypes.number,PropTypes.string]),
   multiplier: PropTypes.number,
   clearCookies: PropTypes.func,
 };
