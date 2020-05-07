@@ -2,7 +2,9 @@
   "name": "clicker",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://luk1790.github.io/clicker/",
   "dependencies": {
+    "gh-pages": "^2.2.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -14,7 +16,9 @@
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
-    "eslint": "eslint ./"
+    "eslint": "eslint ./",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": {
     "production": [
