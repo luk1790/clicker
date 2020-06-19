@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import logo from "./logo.png";
 import styles from "./header.css";
 
-function Header(props){
+function Header(props) {
   function clearWallet() {
     props.clearCookies();
   }
@@ -14,12 +14,14 @@ function Header(props){
       </div>
       <div className="center">Name of Game</div>
       <div className="walletWrapper">
-        Your wallet is {props.counter}${" "}
-        <span
+        <div className="wallet">Your wallet is {props.counter}$</div> 
+        <div className="speed">Speed: {props.speed}</div>
+        <div className="speed">Multiplier: {props.multiplier}</div>
+        {/* <span
           className={props.multiplier ? "sparks" : "sparks hidden"}
         >
           {props.multiplier}
-        </span>
+        </span> */}
       </div>
       <div className="clearWrapper">
         {props.counter > 0 && (
@@ -33,8 +35,9 @@ function Header(props){
 }
 
 Header.propTypes = {
-  counter: PropTypes.oneOfType([PropTypes.number,PropTypes.string]),
+  counter: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   multiplier: PropTypes.number,
+  speed: PropTypes.number,
   clearCookies: PropTypes.func,
 };
 

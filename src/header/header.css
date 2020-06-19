@@ -26,6 +26,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+}
+.header .walletWrapper .speed{
+  font-size: smaller;
+  color: grey;
 }
 @keyframes example {
   0% {

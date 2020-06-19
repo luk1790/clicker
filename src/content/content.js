@@ -20,16 +20,18 @@ class Content extends React.Component {
             return (
               <button
                 key={key}
-                className={`buttons button${key}`}
+                className={`buttons button${key} ${element.speed && 'button-speed'}`}
                 onClick={() => {
                   this.updateMultiply({
-                    multiplyDiff: element.multiplier,
+                    id: element.id,
                     priceDiff: element.price,
                   });
                 }}
                 disabled={element.price > this.props.counter}
               >
-                {`${element.label}-${element.multiplier}-${element.counter}`}
+                <div>{element.label}</div>
+                <div>{element.multiplier !== 0 && `Multiplier:${element.multiplier}`}</div>
+                <div>{ element.speed && `Speed: ${element.speed}`}</div>{`counter:${element.counter}- ${element.price}`}
               </button>
             );
           })}
