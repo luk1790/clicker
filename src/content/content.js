@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import logo from "../header/logo.png";
 import styles from "./content.css";
 
 class Content extends React.Component {
@@ -20,7 +21,9 @@ class Content extends React.Component {
             return (
               <button
                 key={key}
-                className={`buttons button${key} ${element.speed && 'button-speed'}`}
+                className={`buttons button${key} ${
+                  element.speed ? "button-speed" : ''
+                }`}
                 onClick={() => {
                   this.updateMultiply({
                     id: element.id,
@@ -29,9 +32,16 @@ class Content extends React.Component {
                 }}
                 disabled={element.price > this.props.counter}
               >
-                <div>{element.label}</div>
-                <div>{element.multiplier !== 0 && `Multiplier:${element.multiplier}`}</div>
-                <div>{ element.speed && `Speed: ${element.speed}`}</div>{`counter:${element.counter}- ${element.price}`}
+                <div className="buttonsInner">
+                <img src={logo} className="logo" alt="" />
+                  <div>{element.label}</div>
+                  <div>
+                    {element.multiplier !== 0 &&
+                      `Multiplier:${element.multiplier}`}
+                  </div>
+                  {element.speed && (<div>{`Speed: ${element.speed}`}</div>)}
+                  <div>{`counter:${element.counter}- ${element.price}`}</div>
+                </div>
               </button>
             );
           })}
@@ -44,7 +54,7 @@ class Content extends React.Component {
   }
 }
 Content.propTypes = {
-  counter: PropTypes.oneOfType([PropTypes.number,PropTypes.string]),
+  counter: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   elements: PropTypes.array,
   updateState: PropTypes.func,
 };

@@ -1,22 +1,42 @@
-.content{
-
+.content {
 }
-.content .buttonsWrapper{
+.content .buttonsWrapper {
   display: flex;
+  flex-wrap: wrap;
 }
-/* .content .buttonsWrapper .buttons.button-speed{
-  border: yellow;
-} */
-.content .buttonsWrapper .buttons{
-  flex: 1 0;
-  margin: 20px;
 
+.content .buttonsWrapper .buttons {
+  flex: 1 0;
+  margin: 10px;
+  align-items: center;
+  background-color: white;
+  border: none;
+}
+.content .buttonsWrapper .buttons .buttonsInner:hover {
+  opacity: 0.5;
+  box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+    6px 6px 10px rgba(0, 0, 0, 0.9);
+}
+.content .buttonsWrapper .buttons .buttonsInner:active {
+  opacity: 1;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
+    inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+}
+.content .buttonsWrapper .buttons .buttonsInner {
   border: 1px solid;
   background-color: white;
-  border-radius: 125px;
-  height: 125px;
-  width: 125px;
+  border-radius: 130px;
+  height: 130px;
+  width: 130px;
+  margin: auto;
   /* border: none;
   background: none;
   cursor: pointer; */
+}
+.content .buttonsWrapper .buttons .buttonsInner .logo {
+  display: block;
+  width: 50px;
+  margin: auto;
+  border-radius: 28px;
+  /* border: 1px solid; */
 }
