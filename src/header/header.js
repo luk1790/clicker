@@ -1,7 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import logo from "./logo.png";
-import styles from "./header.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import logo from './logo.png';
+// eslint-disable-next-line no-unused-vars
+import styles from './header.css';
 
 function Header(props) {
   function clearWallet() {
@@ -14,7 +15,7 @@ function Header(props) {
       </div>
       <div className="center">Name of Game</div>
       <div className="walletWrapper">
-        <div className="wallet">Your wallet is {props.counter}$</div> 
+        <div className="wallet">Your wallet is {props.counter}$</div>
         <div className="speed">Speed: {props.speed}</div>
         <div className="speed">Multiplier: {props.multiplier}</div>
         {/* <span

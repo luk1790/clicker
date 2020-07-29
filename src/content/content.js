@@ -1,7 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import logo from "../header/logo.png";
-import styles from "./content.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import logo from '../header/logo.png';
+// eslint-disable-next-line no-unused-vars
+import styles from './content.css';
 
 class Content extends React.Component {
   constructor() {
@@ -22,7 +23,7 @@ class Content extends React.Component {
               <button
                 key={key}
                 className={`buttons button${key} ${
-                  element.speed ? "button-speed" : ''
+                  element.speed ? 'button-speed' : ''
                 }`}
                 onClick={() => {
                   this.updateMultiply({
@@ -33,13 +34,13 @@ class Content extends React.Component {
                 disabled={element.price > this.props.counter}
               >
                 <div className="buttonsInner">
-                <img src={logo} className="logo" alt="" />
+                  <img src={logo} className="logo" alt="" />
                   <div>{element.label}</div>
                   <div>
                     {element.multiplier !== 0 &&
                       `Multiplier:${element.multiplier}`}
                   </div>
-                  {element.speed && (<div>{`Speed: ${element.speed}`}</div>)}
+                  {element.speed && <div>{`Speed: ${element.speed}`}</div>}
                   <div>{`counter:${element.counter}- ${element.price}`}</div>
                 </div>
               </button>
