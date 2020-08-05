@@ -1,13 +1,14 @@
 {
     "parser": "babel-eslint",
     "env": {
-        "browser": true
+        "browser": true,
+        "jest": true
     },
     "plugins": [
         "react",
         "react-hooks"
     ],
-    "extends": ["eslint:recommended", "plugin:react/recommended"], 
+    "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"], 
     "rules": {
         "no-unused-vars":1,
         "semi": 1,
