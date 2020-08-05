@@ -20,7 +20,7 @@
     "test": "jest",
     "eject": "react-scripts eject",
     "check:eslint": "eslint ./src/",
-    "check:prettier": "prettier \"./src/**/*.js\"",
+    "check:prettier": "prettier \"./src/**/*.js\" --check",
     "check:prettierFix": "prettier \"./src/**/*.js\" --write",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
