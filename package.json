@@ -20,10 +20,11 @@
     "test": "jest",
     "eject": "react-scripts eject",
     "check:eslint": "eslint ./src/",
-    "check:prettier": "prettier \"./src/**/*.js\" --write",
+    "check:prettier": "prettier \"./src/**/*.js\"",
+    "check:prettierFix": "prettier \"./src/**/*.js\" --write",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "check": "npm run check:eslint && npm run check:prettier"
+    "check": "npm run check:eslint && npm run check:prettierFix"
   },
   "browserslist": {
     "production": [
