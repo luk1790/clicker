@@ -4,7 +4,9 @@ import './App.css';
 import Footer from './footer';
 import Header from './header';
 import Content from './content';
+import Login from './login';
 import Cookies from 'universal-cookie';
+import {MyContext} from './Context';
 
 const cookies = new Cookies();
 
@@ -25,6 +27,7 @@ function App() {
   const [multiplier, setMultiplier] = useState(
     cookiesMultiplier ? cookiesMultiplier : multiplierDefault
   );
+  const [status, setStatus] = useState({page: 'game'});
 
   useEffect(() => {
     updateTitle();
@@ -53,10 +56,10 @@ function App() {
   }
 
   function incrementCounter() {
-    console.log('multi', countMultiply());
-    console.log('speed', countTime());
-    console.log(counter !== '0');
-    console.log(counter);
+    // console.log('multi', countMultiply());
+    // console.log('speed', countTime());
+    // console.log(counter !== '0');
+    // console.log(counter);
     if (counter !== '0') {
       cookies.set('counter', counter + countMultiply(), { path: '/' });
       setCounter(counter + countMultiply());
@@ -87,21 +90,29 @@ function App() {
     cookies.set('counter', 0, { path: '/' });
     cookies.set('multiplier', multiplierDefault, { path: '/' });
   }
+
+  function login() {
+    setStatus({page: 'login'});
+  }
+
+  console.log(status);
   return (
+    <MyContext.Provider value={{status:status, counter: counter}}>
     <div className="clicker">
       <Header
-        counter={counter}
         speed={countTime()}
         multiplier={countMultiply()}
         clearCookies={clearCookies}
+        login={login}
       />
-      <Content
+      {status.page === 'login' && (<Login />)}
+      {status.page === 'game' && (<Content
         elements={multiplier}
         updateState={updateState}
-        counter={counter}
-      />
+      />)}
       <Footer />
     </div>
+    </MyContext.Provider>
   );
 }
 
