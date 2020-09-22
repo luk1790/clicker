@@ -27,7 +27,7 @@ function App() {
   const [multiplier, setMultiplier] = useState(
     cookiesMultiplier ? cookiesMultiplier : multiplierDefault
   );
-  const [status, setStatus] = useState({page: 'game'});
+  const [status, setStatus] = useState({page: 'login'});
 
   useEffect(() => {
     updateTitle();
@@ -56,10 +56,6 @@ function App() {
   }
 
   function incrementCounter() {
-    // console.log('multi', countMultiply());
-    // console.log('speed', countTime());
-    // console.log(counter !== '0');
-    // console.log(counter);
     if (counter !== '0') {
       cookies.set('counter', counter + countMultiply(), { path: '/' });
       setCounter(counter + countMultiply());
@@ -91,8 +87,8 @@ function App() {
     cookies.set('multiplier', multiplierDefault, { path: '/' });
   }
 
-  function login() {
-    setStatus({page: 'login'});
+  function changePage(page) {
+    setStatus({page:page});
   }
 
   console.log(status);
@@ -103,9 +99,9 @@ function App() {
         speed={countTime()}
         multiplier={countMultiply()}
         clearCookies={clearCookies}
-        login={login}
+        changePage={changePage}
       />
-      {status.page === 'login' && (<Login />)}
+      {status.page === 'login' && (<Login changePage={changePage} cookies={cookies}/>)}
       {status.page === 'game' && (<Content
         elements={multiplier}
         updateState={updateState}

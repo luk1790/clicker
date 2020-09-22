@@ -11,15 +11,20 @@ function Header(props) {
   }
   return (
     <MyContext.Consumer>
-      {({status, counter}) => {
+      {({ status, counter }) => {
         console.log(status);
         return (
           <header className="header">
             <div className="logoWrapper">
               <img src={logo} className="logo" alt="" />
-              <button className="clearButton" onClick={props.login}>
-                login
-              </button>
+              {status.page === 'game' && (
+                <button
+                  className="loginButton"
+                  onClick={() => props.changePage('login')}
+                >
+                  login
+                </button>
+              )}
             </div>
             <div className="center">Name of Game</div>
             <div className="walletWrapper">
@@ -55,7 +60,7 @@ Header.propTypes = {
   multiplier: PropTypes.number,
   speed: PropTypes.number,
   clearCookies: PropTypes.func,
-  login: PropTypes.func,
+  changePage: PropTypes.func,
 };
 
 export default Header;
