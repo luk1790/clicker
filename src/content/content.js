@@ -15,7 +15,7 @@ class Content extends React.Component {
           updateState={this.props.updateState}
         />
         <div className="margin-10">
-          <Summary  elements={this.props.elements}/>
+          <Summary elements={this.props.elements} />
         </div>
       </div>
     );

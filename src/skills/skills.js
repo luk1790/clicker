@@ -19,10 +19,10 @@ class Skills extends React.Component {
     let { elements } = this.props;
 
     let icons = {
-      "briefcase": briefcase,
-      "dumbbell": dumbbell,
-      "gauge": gauge,
-      "brain": brain
+      briefcase: briefcase,
+      dumbbell: dumbbell,
+      gauge: gauge,
+      brain: brain,
     };
 
     console.log(icons[elements[0].logo]);
@@ -46,7 +46,7 @@ class Skills extends React.Component {
               >
                 <div className="buttonsInner">
                   <span style={{ fontSize: '48px' }}>
-                  <img src={icons[element.logo]} className="logo" alt="" />
+                    <img src={icons[element.logo]} className="logo" alt="" />
                   </span>
                   <div>{element.label}</div>
                   {/* <div>
