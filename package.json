@@ -4,11 +4,13 @@
   "private": true,
   "homepage": "https://luk1790.github.io/clicker/",
   "dependencies": {
+    "chart.js": "^3.7.0",
     "gh-pages": "^2.2.0",
     "jest": "^26.1.0",
     "prettier": "^2.0.5",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-chartjs-2": "^4.0.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "universal-cookie": "^4.0.3"

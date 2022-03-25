@@ -13,7 +13,7 @@ function Header(props) {
       <div className="logoWrapper">
         <img src={logo} className="logo" alt="" />
       </div>
-      <div className="center">Name of Game</div>
+      <div className="center">Boring game</div>
       <div className="walletWrapper">
         <div className="wallet">Your wallet is {props.counter}$</div>
         <div className="speed">Speed: {props.speed}</div>

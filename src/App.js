@@ -8,20 +8,51 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
+const startValue = 10;
+
 function App() {
-  let cookiesCounter = parseInt(cookies.get('counter'), 10);
+  let cookiesCounter = parseInt(cookies.get('counter'), startValue);
   let cookiesMultiplier = cookies.get('multiplier');
   let multiplierDefault = [
-    { id: 1, label: 'test', multiplier: 1, price: 0, counter: 0 },
-    { id: 2, label: 'test', multiplier: 0, price: 1, counter: 0, speed: 2 },
-    { id: 3, label: 'test', multiplier: 4, price: 200, counter: 0 },
-    { id: 4, label: 'test', multiplier: 6, price: 500, counter: 0 },
-    { id: 5, label: 'test', multiplier: 7, price: 1000, counter: 0 },
-    { id: 6, label: 'test', multiplier: 8, price: 2000, counter: 0 },
+    {
+      id: 1,
+      label: 'Diligence',
+      multiplier: 1,
+      price: 1,
+      counter: 0,
+      logo: 'briefcase',
+    },
+    {
+      id: 2,
+      label: 'Strength',
+      multiplier: 0,
+      price: 1,
+      counter: 0,
+      speed: 2,
+      logo: 'dumbbell',
+    },
+    {
+      id: 3,
+      label: 'Speed',
+      multiplier: 4,
+      price: 200,
+      counter: 0,
+      logo: 'gauge',
+    },
+    {
+      id: 4,
+      label: 'Inteligence',
+      multiplier: 6,
+      price: 500,
+      counter: 0,
+      logo: 'brain',
+    },
+    // { id: 5, label: 'test', multiplier: 7, price: 1000, counter: 0 },
+    // { id: 6, label: 'test', multiplier: 8, price: 2000, counter: 0 },
   ];
   let time = 5000;
 
-  const [counter, setCounter] = useState(cookiesCounter ? cookiesCounter : '0');
+  const [counter, setCounter] = useState(cookiesCounter ? cookiesCounter : 10);
   const [multiplier, setMultiplier] = useState(
     cookiesMultiplier ? cookiesMultiplier : multiplierDefault
   );
@@ -53,6 +84,7 @@ function App() {
   }
 
   function incrementCounter() {
+    console.log('elements', multiplier);
     console.log('multi', countMultiply());
     console.log('speed', countTime());
     console.log(counter !== '0');
@@ -82,9 +114,9 @@ function App() {
   }
 
   function clearCookies() {
-    setCounter('0');
+    setCounter(startValue);
     setMultiplier(multiplierDefault);
-    cookies.set('counter', 0, { path: '/' });
+    cookies.set('counter', startValue, { path: '/' });
     cookies.set('multiplier', multiplierDefault, { path: '/' });
   }
   return (
