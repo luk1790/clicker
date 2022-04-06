@@ -5,51 +5,16 @@ import Footer from './footer';
 import Header from './header';
 import Content from './content';
 import Cookies from 'universal-cookie';
+import { multiplierDefault, valueStartWallet } from './config/main';
 
 const cookies = new Cookies();
 
-const startValue = 10;
+const startValue = valueStartWallet;
 
 function App() {
   let cookiesCounter = parseInt(cookies.get('counter'), startValue);
   let cookiesMultiplier = cookies.get('multiplier');
-  let multiplierDefault = [
-    {
-      id: 1,
-      label: 'Diligence',
-      multiplier: 1,
-      price: 1,
-      counter: 0,
-      logo: 'briefcase',
-    },
-    {
-      id: 2,
-      label: 'Strength',
-      multiplier: 0,
-      price: 1,
-      counter: 0,
-      speed: 2,
-      logo: 'dumbbell',
-    },
-    {
-      id: 3,
-      label: 'Speed',
-      multiplier: 4,
-      price: 200,
-      counter: 0,
-      logo: 'gauge',
-    },
-    {
-      id: 4,
-      label: 'Inteligence',
-      multiplier: 6,
-      price: 500,
-      counter: 0,
-      logo: 'brain',
-    },
-    // { id: 5, label: 'test', multiplier: 7, price: 1000, counter: 0 },
-    // { id: 6, label: 'test', multiplier: 8, price: 2000, counter: 0 },
-  ];
+
   let time = 5000;
 
   const [counter, setCounter] = useState(cookiesCounter ? cookiesCounter : 10);
@@ -70,44 +35,49 @@ function App() {
 
   function countMultiply() {
     return multiplier.reduce(
-      (prev, next) =>
+      (prev: number, next: { multiplier: number; counter: number }) =>
         prev + (next.multiplier ? next.multiplier * next.counter : 0),
       0
     );
   }
   function countTime() {
     let speed = multiplier.reduce(
-      (prev, next) => prev + (next.speed ? next.speed * next.counter : 0),
+      (prev: number, next: { speed: number; counter: number }) =>
+        prev + (next.speed ? next.speed * next.counter : 0),
       0
     );
     return Math.floor(time / (speed ? speed : 1));
   }
 
   function incrementCounter() {
-    console.log('elements', multiplier);
-    console.log('multi', countMultiply());
-    console.log('speed', countTime());
-    console.log(counter !== '0');
-    console.log(counter);
-    if (counter !== '0') {
+    // console.log('elements', multiplier);
+    // console.log('multi', countMultiply());
+    // console.log('speed', countTime());
+    // console.log(counter !== 0);
+    // console.log(counter);
+    if (counter !== 0) {
       cookies.set('counter', counter + countMultiply(), { path: '/' });
       setCounter(counter + countMultiply());
     }
   }
 
   function updateTitle() {
-    document.getElementById('title').innerText = `${counter}$ - Game`;
+    let titleInput = document.getElementById('title');
+    if (titleInput) {
+      titleInput.innerText = `${counter}$ - Game`;
+    }
   }
 
-  function updateState({ id, priceDiff }) {
-    console.log('sdd');
+  function updateState({ id, priceDiff }: { id: number; priceDiff: number }) {
     setCounter(counter - priceDiff);
-    let newMultiplier = multiplier.map((element) => {
-      if (element.id === id) {
-        element.counter++;
+    let newMultiplier = multiplier.map(
+      (element: { id: number; counter: number }) => {
+        if (element.id === id) {
+          element.counter++;
+        }
+        return element;
       }
-      return element;
-    });
+    );
     setMultiplier(newMultiplier);
     cookies.set('counter', counter - priceDiff, { path: '/' });
     cookies.set('multiplier', newMultiplier, { path: '/' });
