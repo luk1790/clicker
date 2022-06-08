@@ -11,16 +11,27 @@ const cookies = new Cookies();
 
 const startValue = valueStartWallet;
 
-function App() {
-  let cookiesCounter = parseInt(cookies.get('counter'), startValue);
-  let cookiesMultiplier = cookies.get('multiplier');
+type multiplierType = {
+  id: number;
+  label: string;
+  multiplier: number;
+  price: number;
+  counter: number;
+  speed?: number;
+  logo: string;
+};
 
-  let time = 5000;
+function App() {
+  let cookiesCounter: number = parseInt(cookies.get('counter'), startValue);
+  let cookiesMultiplier: multiplierType[] = cookies.get('multiplier');
+
+  let time: number = 5000;
 
   const [counter, setCounter] = useState(cookiesCounter ? cookiesCounter : 10);
   const [multiplier, setMultiplier] = useState(
     cookiesMultiplier ? cookiesMultiplier : multiplierDefault
   );
+
 
   useEffect(() => {
     updateTitle();
@@ -33,7 +44,7 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counter]);
 
-  function countMultiply() {
+  function countMultiply(): number {
     return multiplier.reduce(
       (prev: number, next: { multiplier: number; counter: number }) =>
         prev + (next.multiplier ? next.multiplier * next.counter : 0),
@@ -41,11 +52,10 @@ function App() {
     );
   }
   function countTime() {
-    let speed = multiplier.reduce(
-      (prev: number, next: { speed: number; counter: number }) =>
-        prev + (next.speed ? next.speed * next.counter : 0),
-      0
-    );
+    let speed = 0;
+    multiplier.forEach((item) => {
+      return speed + (item.speed ? item.speed * item.counter : 0);
+    });
     return Math.floor(time / (speed ? speed : 1));
   }
 
@@ -70,14 +80,12 @@ function App() {
 
   function updateState({ id, priceDiff }: { id: number; priceDiff: number }) {
     setCounter(counter - priceDiff);
-    let newMultiplier = multiplier.map(
-      (element: { id: number; counter: number }) => {
-        if (element.id === id) {
-          element.counter++;
-        }
-        return element;
+    let newMultiplier: multiplierType[] = multiplier.map((element) => {
+      if (element.id === id) {
+        element.counter++;
       }
-    );
+      return element;
+    });
     setMultiplier(newMultiplier);
     cookies.set('counter', counter - priceDiff, { path: '/' });
     cookies.set('multiplier', newMultiplier, { path: '/' });
