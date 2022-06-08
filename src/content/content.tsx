@@ -1,11 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Skills from './../skills';
 import Summary from './../summary';
 
 import './content.css';
 
-class Content extends React.Component {
+class Content extends React.Component<any, any> {
+  // constructor(props: {
+  //   counter: number;
+  //   elements: [];
+  //   updateState: () => void;
+  // }) {
+  //   super(props);
+  // }
+
   render() {
     return (
       <div className="content">
@@ -21,10 +28,5 @@ class Content extends React.Component {
     );
   }
 }
-Content.propTypes = {
-  counter: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  elements: PropTypes.array,
-  updateState: PropTypes.func,
-};
 
 export default Content;
