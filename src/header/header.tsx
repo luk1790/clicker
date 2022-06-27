@@ -3,7 +3,14 @@ import logo from './logo.png';
 // @ts-ignore
 import './header.css';
 
-class Header extends React.Component<any, any> {
+type HeaderProps = {
+  counter: number,
+  speed: number,
+  multiplier: number,
+  clearCookies: () => void
+}
+
+class Header extends React.Component<HeaderProps, any> {
   render() {
     return (
       <header className="header">
